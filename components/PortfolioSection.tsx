@@ -23,6 +23,10 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({ selectedCategory })
     let imagesToProcess = PORTFOLIO_IMAGES;
     if (selectedCategory !== 'Todos') {
       imagesToProcess = PORTFOLIO_IMAGES.filter(image => image.category === selectedCategory);
+    } else {
+      // For 'Todos' category, shuffle all images and take up to 20
+      const shuffledAllImages = shuffleArray(PORTFOLIO_IMAGES);
+      return shuffledAllImages.slice(0, 20);
     }
     return shuffleArray(imagesToProcess);
   }, [selectedCategory]);
