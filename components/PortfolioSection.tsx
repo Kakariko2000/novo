@@ -48,10 +48,6 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({ selectedCategory })
                     className="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110 group-hover:opacity-80"
                   />
                 </div>
-                <div className="mt-4 p-4 bg-gray-900/50 text-center">
-                  <h3 className="font-bold text-white">{image.location}</h3>
-                  <p className="text-sm text-gray-400 mt-2">{image.equipment}</p>
-                </div>
               </div>
             ))}
           </div>
