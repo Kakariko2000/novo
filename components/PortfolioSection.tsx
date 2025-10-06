@@ -33,7 +33,7 @@ const PortfolioSection: React.FC<PortfolioSectionProps> = ({ selectedCategory })
 
   return (
     <>
-      <section id="portfolio" className="py-20 px-4 sm:px-6 lg:px-8">
+      <section id="portfolio" className="py-10 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-black text-center mb-12 gradient-text">
             Portfólio
