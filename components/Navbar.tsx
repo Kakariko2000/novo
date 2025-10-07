@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import MenuIcon from './icons/MenuIcon';
 import CloseIcon from './icons/CloseIcon';
+import MoreVerticalIcon from './icons/MoreVerticalIcon'; // Importando o novo ícone
 
 interface NavbarProps {
   links: { name: string; href: string }[];
 }
 
 const Navbar: React.FC<NavbarProps> = ({ links }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDesktopMenuOpen, setIsDesktopMenuOpen] = useState(false); // Novo estado para o menu desktop
   const [hasScrolled, setHasScrolled] = useState(false);
+  const desktopMenuRef = useRef<HTMLDivElement>(null); // Ref para o menu desktop
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,17 +21,33 @@ const Navbar: React.FC<NavbarProps> = ({ links }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Efeito para fechar o menu desktop ao clicar fora dele
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (desktopMenuRef.current && !desktopMenuRef.current.contains(event.target as Node)) {
+        setIsDesktopMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [desktopMenuRef]);
+
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault(); // Prevent the default anchor jump
-    const targetId = href.substring(1); // Remove the '#'
+    e.preventDefault(); // Previne o salto padrão da âncora
+    const targetId = href.substring(1); // Remove o '#'
     const targetElement = document.getElementById(targetId);
     
     if (targetElement) {
       targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     
-    if (isMenuOpen) {
-      setIsMenuOpen(false); // Close mobile menu on selection
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false); // Fecha o menu mobile na seleção
+    }
+    if (isDesktopMenuOpen) {
+      setIsDesktopMenuOpen(false); // Fecha o menu desktop na seleção
     }
   }
 
@@ -46,34 +65,50 @@ const Navbar: React.FC<NavbarProps> = ({ links }) => {
               WS
             </a>
           </div>
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              {links.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => handleLinkClick(e, link.href)}
-                  className="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700/50 transition-colors cursor-pointer"
-                >
-                  {link.name}
-                </a>
-              ))}
-            </div>
+          
+          {/* Botão e Dropdown do Menu Desktop */}
+          <div className="relative hidden md:block" ref={desktopMenuRef}>
+            <button
+              onClick={() => setIsDesktopMenuOpen(!isDesktopMenuOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none"
+              aria-label="Menu de navegação"
+            >
+              <MoreVerticalIcon />
+            </button>
+            {isDesktopMenuOpen && (
+              <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-black/90 ring-1 ring-white ring-opacity-5 focus:outline-none">
+                <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                  {links.map((link) => (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      onClick={(e) => handleLinkClick(e, link.href)}
+                      className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/50 hover:text-white transition-colors"
+                      role="menuitem"
+                    >
+                      {link.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
+
+          {/* Botão do Menu Mobile */}
           <div className="md:hidden">
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none"
               aria-label="Menu"
             >
-              {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
+              {isMobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile menu */}
-      <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'} bg-black/90`}>
+      {/* Conteúdo do Menu Mobile */}
+      <div className={`md:hidden ${isMobileMenuOpen ? 'block' : 'hidden'} bg-black/90`}>
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           {links.map((link) => (
             <a
