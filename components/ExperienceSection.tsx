@@ -9,8 +9,8 @@ const ExperienceSection: React.FC = () => {
           Experiências
         </h2>
         <div className="relative">
-          {/* Vertical Line */}
-          <div className="absolute left-1/2 -translate-x-1/2 top-0 h-full w-0.5 gradient-bg"></div>
+          {/* Vertical Line - Hidden on mobile, visible on medium screens and up */}
+          <div className="absolute left-1/2 -translate-x-1/2 top-0 h-full w-0.5 gradient-bg hidden md:block"></div>
 
           <div className="space-y-12">
             {EXPERIENCES.map((exp, index) => (
