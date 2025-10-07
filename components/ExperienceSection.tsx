@@ -19,7 +19,6 @@ const ExperienceSection: React.FC = () => {
                 <div className={`w-full md:w-5/12 text-center ${index % 2 === 0 ? 'md:order-1 md:text-right' : 'md:order-3 md:text-left'}`}>
                   <p className="font-bold text-lg">{exp.company}</p>
                   <p className="text-gray-400 my-1">{exp.description}</p>
-                  <p className="text-sm text-gray-500">{exp.period}</p>
                 </div>
 
                 {/* Dot */}

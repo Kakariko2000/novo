@@ -1,5 +1,3 @@
-// FIX: Replaced incorrect content with type definitions for ImageType and ExperienceType.
-// The original file was a copy of constants.ts, causing a circular import and missing type definitions.
 export interface ImageType {
   id: number;
   src: string;
@@ -18,5 +16,5 @@ export interface ExperienceType {
   id: number;
   company: string;
   description: string;
-  period: string;
+  period?: string; // Tornando 'period' opcional
 }
