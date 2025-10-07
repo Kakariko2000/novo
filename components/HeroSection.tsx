@@ -8,7 +8,7 @@ interface HeroSectionProps {
 
 const HeroSection: React.FC<HeroSectionProps> = ({ categories, selectedCategory, onSelectCategory }) => {
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center text-center px-6">
+    <section id="home" className="min-h-[80vh] flex items-center justify-center text-center px-6">
       <div className="max-w-3xl flex flex-col items-center">
         <div className="space-y-6">
           <div>
