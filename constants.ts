@@ -1446,26 +1446,14 @@ export const PORTFOLIO_IMAGES: ImageType[] = [
 export const EXPERIENCES: ExperienceType[] = [
   {
     id: 1,
-    company: "Freelance Esportivo",
-    description: "Cobertura de eventos esportivos locais, incluindo surf, skate e corridas de rua.",
+    company: "Desafios de Corrida",
+    description: "Participei de 4 Brutus Race e 3 Bravus Race — desafios que testaram meus limites físicos e mentais, reforçando minha disciplina, resistência e espírito de equipe.",
     period: "2018 - Presente",
   },
   {
     id: 2,
-    company: "Revista Hardcore",
-    description: "Colaborador fotográfico para matérias de capa e editoriais sobre o cenário do surf.",
-    period: "2020 - 2022",
-  },
-  {
-    id: 3,
-    company: "Santos FC",
-    description: "Fotógrafo para as categorias de base, documentando treinos e jogos oficiais.",
-    period: "2021",
-  },
-  {
-    id: 4,
-    company: "Red Bull",
-    description: "Fotógrafo credenciado para eventos de esportes radicais patrocinados pela marca na região.",
-    period: "2023",
+    company: "Corridas de Rua Nacionais",
+    description: "Fui selecionado para participar de 4 edições da tradicional Corrida Internacional de São Silvestre e de 4 edições dos 10 km da Tribuna, em Santos — eventos de grande relevância no cenário das corridas de rua no Brasil, que exigem preparo físico, foco e dedicação contínua.",
+    period: "2018 - Presente",
   },
 ];
